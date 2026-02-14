@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ariana | Mi Universo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Background Canvas for Stars -->
+    <canvas id="starfield"></canvas>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="content fade-in-up">
+                <h1 class="title">Para Ariana, <br><span class="highlight">mi universo entero</span></h1>
+                <p class="subtitle">Cada segundo contigo es un regalo.</p>
+                <div class="scroll-indicator">
+                    <span>&#8595;</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Love Counter Section -->
+        <section id="counter" class="counter-section">
+            <h2 class="section-title">Juntos por...</h2>
+            <div class="timer-container glass-panel">
+                <div class="time-unit">
+                    <span id="days">00</span>
+                    <p>Días</p>
+                </div>
+                <div class="time-unit">
+                    <span id="hours">00</span>
+                    <p>Horas</p>
+                </div>
+                <div class="time-unit">
+                    <span id="minutes">00</span>
+                    <p>Minutos</p>
+                </div>
+                <div class="time-unit">
+                    <span id="seconds">00</span>
+                    <p>Segundos</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="gallery-section">
+            <h2 class="section-title">Nuestros Momentos</h2>
+            <div class="bento-grid">
+                <!-- Placeholders: Replace src with actual image paths -->
+                <div class="grid-item item-1 glass-panel">
+                    <img src="/imgs/1.jpg" alt="Moment 1">
+                </div>
+                <div class="grid-item item-2 glass-panel">
+                    <img src="/imgs/5.jpg" alt="Moment 2">
+                </div>
+                <div class="grid-item item-3 glass-panel">
+                    <div class="quote-box">
+                        <p>"En ti encontré mi lugar favorito en el mundo."</p>
+                    </div>
+                </div>
+                <div class="grid-item item-4 glass-panel">
+                    <img src="/imgs/3.jpg" alt="Moment 3">
+                </div>
+                <div class="grid-item item-5 glass-panel">
+                    <img src="/imgs/2.jpg" alt="Moment 4">
+                </div>
+            </div>
+        </section>
+
+        <!-- Plant Mini-Game Section -->
+        <section id="plant-game" class="game-section">
+            <h2 class="section-title">Cultiva nuestro amor</h2>
+            <p class="game-instruction">Atrapa las nubes para regar la planta</p>
+
+            <div class="game-container">
+                <div id="clouds-container"></div>
+
+                <div class="plant-container">
+                    <svg id="plant-svg" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Pot -->
+                        <g id="pot">
+                            <path d="M60 250 L140 250 L130 290 L70 290 Z" fill="#d4a373" stroke="#bc6c25"
+                                stroke-width="2" />
+                            <rect x="55" y="240" width="90" height="10" rx="2" fill="#bc6c25" />
+                        </g>
+
+                        <!-- Stage 0: Sprout -->
+                        <g id="stage-0" class="plant-stage visible">
+                            <path d="M100 240 Q100 200 90 180" stroke="#8ac926" stroke-width="4" fill="none" />
+                            <ellipse cx="90" cy="180" rx="10" ry="5" fill="#8ac926" transform="rotate(-30 90 180)" />
+                            <ellipse cx="100" cy="190" rx="8" ry="4" fill="#8ac926" transform="rotate(30 100 190)" />
+                        </g>
+
+                        <!-- Stage 1: Small Plant -->
+                        <g id="stage-1" class="plant-stage hidden">
+                            <path d="M100 240 Q100 180 100 150" stroke="#8ac926" stroke-width="5" fill="none" />
+                            <path d="M100 200 Q80 180 70 160" stroke="#8ac926" stroke-width="3" fill="none" />
+                            <path d="M100 180 Q120 160 130 140" stroke="#8ac926" stroke-width="3" fill="none" />
+                            <circle cx="70" cy="160" r="5" fill="#8ac926" />
+                            <circle cx="130" cy="140" r="5" fill="#8ac926" />
+                            <ellipse cx="100" cy="150" rx="15" ry="8" fill="#8ac926" />
+                        </g>
+
+                        <!-- Stage 2: Bud -->
+                        <g id="stage-2" class="plant-stage hidden">
+                            <path d="M100 240 Q100 150 100 100" stroke="#52b788" stroke-width="6" fill="none" />
+                            <!-- Leaves -->
+                            <path d="M100 210 Q60 180 50 140" stroke="#52b788" stroke-width="3" fill="none" />
+                            <path d="M100 190 Q140 160 150 120" stroke="#52b788" stroke-width="3" fill="none" />
+                            <ellipse cx="50" cy="140" rx="15" ry="8" fill="#52b788" transform="rotate(-20 50 140)" />
+                            <ellipse cx="150" cy="120" rx="15" ry="8" fill="#52b788" transform="rotate(20 150 120)" />
+                            <!-- Bud -->
+                            <circle cx="100" cy="90" r="12" fill="#ffd7e9" stroke="#b76e79" stroke-width="2" />
+                            <path d="M100 102 L100 240" stroke="none" fill="none" />
+                        </g>
+
+                        <!-- Stage 3: Bloom (Final) -->
+                        <g id="stage-3" class="plant-stage hidden">
+                            <path d="M100 240 Q100 150 100 100" stroke="#2d6a4f" stroke-width="6" fill="none" />
+                            <!-- Leaves -->
+                            <path d="M100 210 Q50 180 40 140" stroke="#2d6a4f" stroke-width="3" fill="none" />
+                            <path d="M100 190 Q150 160 160 120" stroke="#2d6a4f" stroke-width="3" fill="none" />
+                            <ellipse cx="40" cy="140" rx="20" ry="10" fill="#40916c" transform="rotate(-20 40 140)" />
+                            <ellipse cx="160" cy="120" rx="20" ry="10" fill="#40916c" transform="rotate(20 160 120)" />
+
+                            <!-- Flower -->
+                            <g id="flower-head">
+                                <circle cx="100" cy="80" r="15" fill="#fff0f3" />
+                                <circle cx="100" cy="60" r="15" fill="#b76e79" opacity="0.8" />
+                                <circle cx="120" cy="80" r="15" fill="#b76e79" opacity="0.8" />
+                                <circle cx="100" cy="100" r="15" fill="#b76e79" opacity="0.8" />
+                                <circle cx="80" cy="80" r="15" fill="#b76e79" opacity="0.8" />
+                                <circle cx="100" cy="80" r="10" fill="#ffd7e9" stroke="#fff" stroke-width="1" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Overlay Layer -->
+    <div id="overlay" class="love-letter-overlay hidden">
+        <button id="closeOverlay" class="close-btn">&times;</button>
+        <div class="letter-content glass-panel">
+            <h2>Mi Querida Ariana,</h2>
+            <p id="loveLetterText">
+                Te amo. Porque estar contigo se siente igual que cuando el mundo no me esta mirando.<br><br>
+                Si siempre te veo es porque en tus ojos me encuentro.
+                El dolor de tu ausencia es punzante y devastador. Daria lo que fuera por nunca haberlo sentido,
+                cualquier cosa. Excepto nunca haberte conocido<br><br>
+                Feliz San Valentín, Feliz mes, Feliz vida, Feliz todo, mi amor.
+            </p>
+            <p class="signature">- Por siempre tuyo</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
